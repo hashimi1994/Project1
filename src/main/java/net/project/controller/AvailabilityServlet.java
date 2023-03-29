@@ -1,5 +1,7 @@
 package net.project.controller;
+import java.time.LocalDateTime;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
 
@@ -33,36 +35,42 @@ import net.project.dao.*;
 /**
  * Servlet implementation class AvailabilityServlet
  */
-@WebServlet(name = "AvailabilityServlet", urlPatterns = {"/AvailabilityServlet"})
+@WebServlet("/professoravailability")
 public class AvailabilityServlet extends HttpServlet {
-	 private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-	    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	        AvailabilityDAO availabilityDAO = new AvailabilityDAO();
-	        List<TimeSlot> timeSlots = availabilityDAO.getAllTimeSlots();
+    private AvailabilityDAO availabilityDAO;
 
-	        HttpSession session = request.getSession();
-	        session.setAttribute("timeSlots", timeSlots);
+    public void init() {
+        availabilityDAO = new AvailabilityDAO();
+    }
 
-	        response.sendRedirect("professor_dashboard.jsp");
-	    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        LocalDateTime startTime = LocalDateTime.parse(request.getParameter("startTime"));
+        LocalDateTime endTime = LocalDateTime.parse(request.getParameter("endTime"));
+        int professorId = Integer.parseInt(request.getParameter("professorId"));
+        boolean claimed = "on".equals(request.getParameter("claimed"));
 
-	    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	        String action = request.getParameter("action");
+        TimeSlot timeSlot = new TimeSlot(0, startTime, endTime, professorId, claimed);
+        if (availabilityDAO.createTimeSlot(timeSlot)) {
+            // Redirect to the success page or display a success message
+            response.sendRedirect("jsp/timeslotsuccess.jsp"); // Replace with the success page URL
+        } else {
+            // Redirect to the error page or display an error message
+            response.sendRedirect("jsp/error.jsp"); // Replace with the error page URL
+        }
+    }
 
-	        if ("create".equals(action)) {
-	            // Handle creating a new time slot
-	        } else if ("update".equals(action)) {
-	            // Handle updating an existing time slot
-	        } else if ("delete".equals(action)) {
-	            // Handle deleting an existing time slot
-	        } else {
-	            // Handle invalid action
-	            response.sendRedirect("schedule_dashboard.jsp?error=invalid-action");
-	        }
-	    }
-		}
-       
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        List<TimeSlot> timeSlots = availabilityDAO.getAllTimeSlots(); 
+        
+        request.setAttribute("timeSlots", timeSlots);
 
+        // Forward the request to the JSP file
+        RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/schedule_dashboard.jsp");
+        dispatcher.forward(request, response);
+    }
+}

@@ -8,7 +8,7 @@
 <body>
     <h1>Register</h1>
     
-   <form action="RegisterServlet" method="post">
+   <form action="<%= request.getContextPath() %>/registeration" method="post">
         <table>
             <tr>
                 <td><label for="userType">User Type:</label></td>

@@ -15,7 +15,7 @@ import net.project.dao.*;
 /**
  * Servlet implementation class LoginServlet2
  */
-@WebServlet(name = "LoginServlet2", urlPatterns = {"/LoginServlet2"})
+@WebServlet("/loginuser")
 public class LoginServlet2 extends HttpServlet {
 	 private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,7 @@ public class LoginServlet2 extends HttpServlet {
 	    }
 
 	    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	        request.getRequestDispatcher("login.jsp").forward(request, response);
+	        request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
 	    }
 
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,9 +39,9 @@ public class LoginServlet2 extends HttpServlet {
 	            session.setAttribute("user", user);
 
 	            if ("student".equals(user.getUserType())) {
-	                response.sendRedirect("/student_dashboard.jsp");
+	                response.sendRedirect("jsp/student_dashboard.jsp");
 	            } else if ("professor".equals(user.getUserType())) {
-	                response.sendRedirect("/professor_dashboard.jsp");
+	                response.sendRedirect("jsp/professor_dashboard.jsp");
 	            } else {
 	                request.setAttribute("errorMessage", "Invalid user type");
 	                request.getRequestDispatcher("jsp/login.jsp").forward(request, response);

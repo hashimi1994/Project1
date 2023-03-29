@@ -15,7 +15,7 @@ import net.project.model.*;
  * Servlet implementation class RegisterServlet
  */
 
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
+@WebServlet ("/registeration")
 public class RegisterServlet extends HttpServlet {
 
     private UserDAO userDAO;
@@ -23,6 +23,10 @@ public class RegisterServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         userDAO = new UserDAO();
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    	 request.getRequestDispatcher("jsp/success.jsp");
     }
 
     @Override

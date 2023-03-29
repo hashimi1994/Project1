@@ -21,11 +21,17 @@
     <version>5.0.0</version>
     <scope>provided</scope>
 </dependency>
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.32</version>
+</dependency>
     <!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
 <dependency>
-    <groupId>javax.servlet</groupId>
+    <groupId>javax.servlet.jsp</groupId>
     <artifactId>jsp-api</artifactId>
-    <version>2.0</version>
+    <version>2.2</version>
     <scope>provided</scope>
 </dependency>
 <dependency>
@@ -33,7 +39,12 @@
     <artifactId>tomcat-embed-core</artifactId>
     <version>9.0.63</version>
 </dependency>
-  </dependencies>
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+ </dependencies>
   <build>
     <finalName>NewProject</finalName>
   </build>

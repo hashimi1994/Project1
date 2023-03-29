@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
                 <h1>Office Hours Calendar Login</h1>
-    <form action="LoginServlet" method="post">
+    <form action="<%= request.getContextPath() %>/loginuser" method="post">
         <table>
             <tr>
                 <td><label for="username">Username:</label></td>

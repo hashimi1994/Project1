@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
- <h1>Office Hours Calendar Login</h1>
-    <form action="LoginServlet" method="post">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <h1>Office Hours Calendar Login</h1>
+    <form action="<%= request.getContextPath() %>/loginuser" method="post">
         <table>
             <tr>
                 <td><label for="username">Username:</label></td>
@@ -29,5 +30,6 @@
         </table>
     </form>
     <p>Don't have an account? <a href="jsp/register.jsp">Register here</a>.</p>
+   
     </body>
 </html>
