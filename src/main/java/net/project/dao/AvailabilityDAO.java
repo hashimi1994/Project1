@@ -1,5 +1,6 @@
 package net.project.dao;
 import net.project.model.DBConnection;
+
 import net.project.model.TimeSlot;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -69,27 +70,12 @@ public class AvailabilityDAO {
         }
     }
 
-    public boolean updateTimeSlot(TimeSlot timeSlot) {
-        String query = "UPDATE ProfTimeSlots SET StartTime = ?, EndTime = ?, Professor = ?, Claimed = ? WHERE TimeSlotID = ?";
-        try (Connection connection = DBConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setTimestamp(1, Timestamp.valueOf(timeSlot.getStartTime()));
-            preparedStatement.setTimestamp(2, Timestamp.valueOf(timeSlot.getEndTime()));
-            preparedStatement.setInt(3, timeSlot.getProfessorId());
-            preparedStatement.setBoolean(4, timeSlot.isClaimed());
-            preparedStatement.setInt(5, timeSlot.getId());
-            int rowsAffected = preparedStatement.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            throw new RuntimeException("Error updating time slot", e);
-        }
-    
-    }
-    public boolean deleteTimeSlot(int id) {
+
+    public boolean deleteTimeSlot(TimeSlot timeslot) {
         String query = "DELETE FROM ProfTimeSlots WHERE TimeSlotID = ?";
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, timeslot.getId());
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {

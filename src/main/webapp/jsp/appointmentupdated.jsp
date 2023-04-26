@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Your appointment Page</title>
+<title>Change Request</title>
 </head>
 <body>
-Your appointment has been created
+Your Change Request was Approved.
 </body>
 </html>

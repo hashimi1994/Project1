@@ -1,10 +1,11 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Professor Timeslot</title>
-        <style type="text/css">
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration</title>
+<style type="text/css">
 		body {
 		background-color: black;
 		color: white;
@@ -33,8 +34,8 @@
 		color: white;
 		}
 	</style>
-    </head>
-    <body>
-        <h1>Your timeslot has been created</h1>
-    </body>
+</head>
+<body>
+Your registration was successful, please go back to the login page to login.
+</body>
 </html>

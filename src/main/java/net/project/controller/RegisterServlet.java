@@ -60,6 +60,6 @@ public class RegisterServlet extends HttpServlet {
         } else {
             request.setAttribute("errorMessage", "Registration failed. Please try again.");
         }
-        request.getRequestDispatcher("jsp/register.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/Registration_message.jsp").forward(request, response);
     }
 }

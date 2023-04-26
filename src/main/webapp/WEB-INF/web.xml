@@ -5,6 +5,7 @@
 <web-app>
 
   <display-name>Archetype Created Web Application</display-name>
+  
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
@@ -59,6 +60,12 @@
   	<description></description>
   	<servlet-class>net.project.controller.RegisterServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<display-name>LogoutServlet</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.LogoutServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/LoginServlet</url-pattern>
@@ -95,4 +102,11 @@
   	<servlet-name>RegisterServlet</servlet-name>
   	<url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>jsp/login.jsp</welcome-file>
+</welcome-file-list>
 </web-app> 

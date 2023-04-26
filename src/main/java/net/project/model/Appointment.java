@@ -4,31 +4,32 @@ package net.project.model;
 import java.time.LocalDateTime;
 
 public class Appointment {
-
-	private int AppointmentID;
+	private int id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private int professorId;
+    private int studentId;
     private String notes;
     
     
-	public Appointment(int AppointmentID, LocalDateTime startTime, LocalDateTime endTime, int professorId,
+	public Appointment(int id, LocalDateTime startTime, LocalDateTime endTime, int professorId, int studentId,
 			String notes) {
 		super();
-		this.AppointmentID = AppointmentID;
+		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.professorId = professorId;
+		this.studentId = studentId;
 		this.notes = notes;
 	}
 	public Appointment() {
 		
 	}
-	public int getAppointmentID() {
-		return AppointmentID;
+	public int getid() {
+		return id;
 	}
-	public void setAppointmentID(int id) {
-		this.AppointmentID = AppointmentID;
+	public void setid(int id) {
+		this.id = id;
 	}
 	public LocalDateTime getStartTime() {
 		return startTime;
@@ -47,6 +48,13 @@ public class Appointment {
 	}
 	public void setProfessorId(int professorId) {
 		this.professorId = professorId;
+	}
+	public int getStudentId() {
+		return studentId;
+	}
+	
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
 	
 	public String getNotes() {
