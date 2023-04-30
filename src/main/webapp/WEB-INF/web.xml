@@ -1,0 +1,112 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+
+  <display-name>Archetype Created Web Application</display-name>
+  
+  <servlet>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<display-name>LoginServlet</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LoginServlet1</servlet-name>
+  	<display-name>LoginServlet1</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.LoginServlet1</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>test</servlet-name>
+  	<display-name>test</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.test</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>test1</servlet-name>
+  	<display-name>test1</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.test1</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Test3</servlet-name>
+  	<display-name>Test3</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.Test3</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LoginServlet2</servlet-name>
+  	<display-name>LoginServlet2</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.LoginServlet2</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AppointmentServlet</servlet-name>
+  	<display-name>AppointmentServlet</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.AppointmentServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AvailabilityServlet</servlet-name>
+  	<display-name>AvailabilityServlet</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.AvailabilityServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>RegisterServlet</servlet-name>
+  	<display-name>RegisterServlet</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.RegisterServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<display-name>LogoutServlet</display-name>
+  	<description></description>
+  	<servlet-class>net.project.controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoginServlet1</servlet-name>
+  	<url-pattern>/LoginServlet1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>test</servlet-name>
+  	<url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>test1</servlet-name>
+  	<url-pattern>/test1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Test3</servlet-name>
+  	<url-pattern>/Test3</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoginServlet2</servlet-name>
+  	<url-pattern>/LoginServlet2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AppointmentServlet</servlet-name>
+  	<url-pattern>/AppointmentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AvailabilityServlet</servlet-name>
+  	<url-pattern>/AvailabilityServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RegisterServlet</servlet-name>
+  	<url-pattern>/RegisterServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>jsp/login.jsp</welcome-file>
+</welcome-file-list>
+</web-app> 
