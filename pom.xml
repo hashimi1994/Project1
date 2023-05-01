@@ -44,8 +44,20 @@
     <artifactId>jstl</artifactId>
     <version>1.2</version>
 </dependency>
+
  </dependencies>
   <build>
+  
+  
+      <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.1</version>
+        </plugin>
+    </plugins>
+  
+  
     <finalName>NewProject</finalName>
   </build>
 </project>

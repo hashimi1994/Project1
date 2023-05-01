@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@page import="net.project.model.TimeSlot"%>
 <%@page import="net.project.dao.AvailabilityDAO"%>
+<%@page import="javax.servlet.http.HttpSession" %>
+<%@page import="net.project.model.User"%>
 
 <!DOCTYPE html>
 <html>
@@ -58,6 +60,9 @@
             <% 
             List<TimeSlot> timeSlots = null;
             AvailabilityDAO availabilityDAO = new AvailabilityDAO();
+            
+            User sessionUser = (User)session.getAttribute("user");
+        	int sessionUserId = sessionUser.getId();
             try {
                  timeSlots = availabilityDAO.getAllTimeSlots();
               
@@ -73,8 +78,11 @@
             </tr>
             <% 
             } else {
+            	
+            	
                 // Loop through the timeSlots list and display each time slot in a row of the table
                 for (TimeSlot timeSlot : timeSlots) {
+                	if(!timeSlot.isClaimed()){
             %>
             <tr>
                 <td><%= timeSlot.getId() %></td>
@@ -85,23 +93,41 @@
                 <td>
                     <form action="<%= request.getContextPath() %>/appointmentpage" method="post">
                          <input type="hidden" name="action" value="schedule">
-                         <input type="hidden" name="id" value="<%= timeSlot.getId() %>">
+                         <input type="hidden" name="timeSlotId" value="<%= timeSlot.getId() %>">
                          <input type="hidden" name="startTime" value="<%= timeSlot.getStartTime().toString() %>">
                          <input type="hidden" name="endTime" value="<%= timeSlot.getEndTime().toString() %>">
                          <input type="hidden" name="professorId" value="<%= timeSlot.getProfessorId() %>">
+                         <input type="hidden" name="studentId" value="<%= sessionUserId %>" >
                          <input type="submit" value="Schedule Appointment">
                     </form>
                 </td>
             </tr>
             <% 
+                	}
                 }
             }
             %>
         </tbody>
     </table>
 
-  <p><a href="professor_dashboard.jsp">Back to Professor Dashboard</a></p>
 
+  <% 
+  if(sessionUser.getUserType() == "professor"){
+  %>
+  <p><a href="professor_dashboard.jsp">Back to Professor Dashboard</a></p>
+  <% 
+  } 
+  else{
+  %>
+  <p><a href="student_dashboard.jsp">Back to Student Dashboard</a></p>
+
+  <% 
+  }
+  %>
+  
+  
+  
+  
    <form action="<%= request.getContextPath() %>/logout" method="post">
         <input type="submit" value="Logout">
     </form>

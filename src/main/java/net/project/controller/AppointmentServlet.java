@@ -41,7 +41,8 @@ public class AppointmentServlet extends HttpServlet {
 	        
 	        if ("schedule".equals(action)) {
 	            try {
-	                int id = Integer.parseInt(request.getParameter("id"));
+	            	int id = 0; //Placeholder value that will be asigned by mysql auto increment
+	                int timeSlotId = Integer.parseInt(request.getParameter("timeSlotId"));
 	                LocalDateTime startTime = LocalDateTime.parse(request.getParameter("startTime"));
 	                LocalDateTime endTime = LocalDateTime.parse(request.getParameter("endTime"));
 	                int professorId = Integer.parseInt(request.getParameter("professorId"));
@@ -50,7 +51,17 @@ public class AppointmentServlet extends HttpServlet {
 	                
 	                Appointment appointment = new Appointment(id, startTime, endTime, professorId, studentId, notes);
 	                if (appointmentDAO.createAppointment(appointment)) {
-	                    response.sendRedirect(request.getContextPath() + "/jsp/appointment_created.jsp");
+	                       
+	                    //Update the Timeslot to show it was claimed
+	                 TimeSlot timeslot = new TimeSlot(timeSlotId, startTime, endTime, professorId, false);   
+	                    
+	                 AvailabilityDAO availabilityDAO = new AvailabilityDAO();
+	                   
+	                 availabilityDAO.claimTimeSlot(timeSlotId);  
+	                   
+	                 
+	                 
+	                 response.sendRedirect(request.getContextPath() + "/jsp/appointment_created.jsp");  
 	                } else {
 	                    response.sendRedirect(request.getContextPath() + "/jsp/error.jsp");
 	                }
@@ -78,6 +89,11 @@ public class AppointmentServlet extends HttpServlet {
 	    	            int professorId = Integer.parseInt(request.getParameter("professorId"));
 	    	            int studentId = Integer.parseInt(request.getParameter("studentId"));
 	    	            String notes = request.getParameter("notes");
+	    	            String newNotes = request.getParameter("new-notes");
+	    	            
+	    	            if(newNotes != "") {
+	    	            	notes = newNotes;
+	    	            }
 	    	            
 	    	            Appointment appointment = new Appointment(id, startTime, endTime, professorId, studentId ,  notes);
 	    	            

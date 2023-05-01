@@ -1,6 +1,7 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="net.project.model.User"%>
+<%@page import="javax.servlet.http.HttpSession" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,17 +35,26 @@
 		background-color: #444; /* add background color to table cells */
 		color: white;
 		}
+		ul{
+		list-style-type: none;
+		}
+		a {
+  		text-decoration: none;
+  		color: purple;
+		}
 	</style>
 </head>
 <body>
-    <h1>Welcome</h1>
+
+	<%User sessionUser = (User)session.getAttribute("user"); %>
+
+    <h1>Welcome:  <%=sessionUser.getFirstName() +" " + sessionUser.getLastName()%></h1>
     <h2>Student Dashboard</h2>
 
     <h3>Actions</h3>
     <ul>
         <li><a href="viewappointments.jsp">View Appointments</a></li>
         <li><a href="schedule_dashboard.jsp">Schedule Appointment</a></li>
-        <li><a href="updateappointment.jsp">Update Appointment</a></li>
         <li><a href="deleteappointment.jsp">Cancel Appointment</a></li>
     </ul>
 

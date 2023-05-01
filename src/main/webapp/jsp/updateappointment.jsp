@@ -2,6 +2,9 @@
 <%@page import="java.util.List"%>
 <%@page import="net.project.model.Appointment"%>
 <%@page import="net.project.dao.AppointmentDAO"%>
+<%@page import="javax.servlet.http.HttpSession" %>
+<%@page import="net.project.model.User"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -42,14 +45,14 @@
     <h1>Welcome</h1>
     <h2>Scheduled Appointments</h2>
 
-    <h3>List of Appointments</h3>
+    <h3>Your List of Appointments</h3>
     <table>
         <thead>
             <tr>
                 <th>ID</th>            
                 <th>Start Time</th>
                 <th>End Time</th>
-                <th>Professor ID</th>
+                <th>Student ID</th>
                 <th>Notes</th>
                 <th>Action</th>
             </tr>
@@ -70,33 +73,41 @@
                 </tr>
             <% 
             } else {
+            	User sessionUser = (User)session.getAttribute("user");
+            	int sessionUserId = sessionUser.getId();
                 for (Appointment appointment : appointmentList) {
+                	if(appointment.getProfessorId() == sessionUserId){
             %>
                 <tr>
                     <td><%= appointment.getid() %></td>
                     <td><%= appointment.getStartTime() %></td>
                     <td><%= appointment.getEndTime() %></td>
-                    <td><%= appointment.getProfessorId() %></td>
+                    <td><%= appointment.getStudentId() %></td>
                     <td><%= appointment.getNotes() %></td>
                     <td>
                         <form action="<%= request.getContextPath() %>/appointmentpage" method="post">
                             <input type="hidden" name="action" value="update">
                             <input type="hidden" name="id" value="<%= appointment.getid() %>">
-                            <input type="hidden" name="professorId" value="<%= appointment.getProfessorId() %>">
+                            <input type="hidden" name="professorId" value="<%= sessionUserId %>">
+                            <input type="hidden" name="studentId" value="<%= appointment.getProfessorId() %>" >
                             <input type="hidden" name="notes" value="<%= appointment.getNotes() %>">
                             Start Time: <input type="datetime-local" name="startTime" value="<%= appointment.getStartTime().toString().replace("T", " ") %>">
                             End Time: <input type="datetime-local" name="endTime" value="<%= appointment.getEndTime().toString().replace("T", " ") %>">
+                            <input type="text" name="new-notes" placeholder="NEW NOTES">
                             <input type="submit" value="Update Appointment">
                         </form>
                     </td>
                 </tr>
             <% 
+                	}
                 }
             }
             %>
         </tbody>
     </table>
-
+    
+	<p><a href="professor_dashboard.jsp">Back to Professor Dashboard</a></p>
+	
    <form action="<%= request.getContextPath() %>/logout" method="post">
         <input type="submit" value="Logout">
     </form>

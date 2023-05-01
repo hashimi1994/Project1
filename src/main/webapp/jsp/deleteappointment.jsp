@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@page import="net.project.model.Appointment"%>
 <%@page import="net.project.dao.AppointmentDAO"%>
+<%@page import="javax.servlet.http.HttpSession" %>
+<%@page import="net.project.model.User"%>
 
 <!DOCTYPE html>
 <html>
@@ -70,7 +72,10 @@
                 </tr>
             <% 
             } else {
+            	User sessionUser = (User)session.getAttribute("user");
+            	int sessionUserId = sessionUser.getId();
                 for (Appointment appointment : appointmentList) {
+                	if(appointment.getStudentId() == sessionUserId){
             %>
                 <tr>
                     <td><%= appointment.getid() %></td>
@@ -92,11 +97,15 @@
                     </td>
                 </tr>
             <% 
+                	}
                 }
             }
             %>
         </tbody>
     </table>
+    
+    <p><a href="student_dashboard.jsp">Back to Student Dashboard</a></p>
+    
 
     <form action="<%= request.getContextPath() %>/logout" method="post">
         <input type="submit" value="Logout">

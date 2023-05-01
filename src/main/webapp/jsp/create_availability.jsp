@@ -1,3 +1,8 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="net.project.model.User"%>
+<%@page import="javax.servlet.http.HttpSession" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +39,14 @@
 		}
 	</style>
 </head>
+
+<%
+User sessionUser = (User)session.getAttribute("user");
+int sessionUserId = sessionUser.getId();
+%>
+
+
+
 <body>
     <h1>Create Availability</h1>
     <form action="<%= request.getContextPath() %>/professoravailability" method="post">
@@ -51,17 +64,14 @@
             </tr>
             <tr>
                 <td><label for="professorId">Professor ID:</label></td>
-                <td><input type="number" name="professorId" id="professorId" required></td>
-            </tr>
-            <tr>
-                <td><label for="claimed">Claimed:</label></td>
-                <td>
-                    <input type="checkbox" name="claimed" id="claimed">
-                    <label for="claimed">Check if claimed</label>
-                </td>
+                <td><%= sessionUserId %><input type="hidden" name="professorId" id="professorId" value="<%= sessionUserId %>"></td>
             </tr>
         </table>
         <button type="submit">Submit</button>
+    </form>
+    <p><a href="professor_dashboard.jsp">Back to Professor Dashboard</a></p>
+    <form action="<%= request.getContextPath() %>/logout" method="post">
+        <input type="submit" value="Logout">
     </form>
 </body>
 </html>

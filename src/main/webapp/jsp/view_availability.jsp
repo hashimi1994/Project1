@@ -2,15 +2,14 @@
 <%@page import="java.util.List"%>
 <%@page import="net.project.model.TimeSlot"%>
 <%@page import="net.project.dao.AvailabilityDAO"%>
-<%@page import="javax.servlet.http.HttpSession" %>
 <%@page import="net.project.model.User"%>
-
+<%@page import="javax.servlet.http.HttpSession" %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title> Professor Schedule Dashboard</title>
+    <title> Professor Availability Dashboard</title>
   <style type="text/css">
 		body {
 		background-color: black;
@@ -43,7 +42,7 @@
 </head>
 <body>
     <h1>Welcome</h1>
-    <h2>Schedule Dashboard</h2>
+    <h2>Availability Dashboard</h2>
 
     <h3>Available Time Slots</h3>
     <table>
@@ -54,7 +53,7 @@
                 <th>End Time</th>
                 <th>Professor ID</th>
                 <th>Claimed</th>
-                <th>Action</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -78,6 +77,7 @@
             } else {
             	User sessionUser = (User)session.getAttribute("user");
             	int sessionUserId = sessionUser.getId();
+            	
                 // Loop through the timeSlots list and display each time slot in a row of the table
                 for (TimeSlot timeSlot : timeSlots) {
                 	if(timeSlot.getProfessorId() == sessionUserId){
@@ -88,28 +88,19 @@
                 <td><%= timeSlot.getEndTime() %></td>
                 <td><%= timeSlot.getProfessorId() %></td>
                 <td><%= timeSlot.isClaimed() %></td>
-                <td>
-                    <form action="<%= request.getContextPath() %>/professoravailability" method="post">
-                         <input type="hidden" name="action" value="delete">
-                         <input type="hidden" name="id" value="<%= timeSlot.getId() %>">
-                         <input type="hidden" name="startTime" value="<%= timeSlot.getStartTime().toString() %>">
-                         <input type="hidden" name="endTime" value="<%= timeSlot.getEndTime().toString() %>">
-                         <input type="hidden" name="professorId" value="<%= timeSlot.getProfessorId() %>">
-                         <input type="submit" value="Delete Availability">
-                    </form>
-                </td>
+               
             </tr>
             <% 
-                	}
+                }
                 }
             }
             %>
         </tbody>
     </table>
 
-    <p><a href="professor_dashboard.jsp">Back to Professor Dashboard</a></p>
+  <p><a href="professor_dashboard.jsp">Back to Professor Dashboard</a></p>
 
-    <form action="<%= request.getContextPath() %>/logout" method="post">
+   <form action="<%= request.getContextPath() %>/logout" method="post">
         <input type="submit" value="Logout">
     </form>
 </body>

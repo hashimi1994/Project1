@@ -58,15 +58,15 @@ public class AppointmentDAO {
 
     public boolean createAppointment(Appointment appointment) {
     	
-        String query = "INSERT INTO Appointments (id, startTime, endTime, professorId, studentId, notes) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Appointments (startTime, endTime, professorId, studentId, notes) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setObject(1, appointment.getid());
-            preparedStatement.setObject(2, appointment.getStartTime());
-            preparedStatement.setObject(3, appointment.getEndTime());
-            preparedStatement.setInt(4, appointment.getProfessorId());
-            preparedStatement.setInt(5, appointment.getStudentId());
-            preparedStatement.setString(6, appointment.getNotes());
+            //preparedStatement.setObject(1, appointment.getid());
+            preparedStatement.setObject(1, appointment.getStartTime());
+            preparedStatement.setObject(2, appointment.getEndTime());
+            preparedStatement.setInt(3, appointment.getProfessorId());
+            preparedStatement.setInt(4, appointment.getStudentId());
+            preparedStatement.setString(5, appointment.getNotes());
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {

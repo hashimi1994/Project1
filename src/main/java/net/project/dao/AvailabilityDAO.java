@@ -82,5 +82,20 @@ public class AvailabilityDAO {
             throw new RuntimeException("Error deleting time slot", e);
         }
     }
+    
+    public boolean claimTimeSlot(int id) {
+    	String query = "UPDATE ProfTimeSlots SET Claimed=1 WHERE TimeSlotID=?";
+    	try (Connection connection = DBConnection.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+               //preparedStatement.setInt(1, 1);
+               preparedStatement.setInt(1, id);       
+               int rowsAffected = preparedStatement.executeUpdate();
+               return rowsAffected > 0;
+           } catch (SQLException e) {
+               throw new RuntimeException("Error claiming time slot", e);
+           }
+    }
+    
+    
 }
     

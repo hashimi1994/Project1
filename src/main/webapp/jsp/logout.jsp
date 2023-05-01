@@ -36,6 +36,6 @@
 	</style>
 </head>
 <body>
-You have been logout!
+You have been logged out!
 </body>
 </html>

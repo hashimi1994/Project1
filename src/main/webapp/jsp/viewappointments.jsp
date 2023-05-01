@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@page import="net.project.model.Appointment"%>
 <%@page import="net.project.dao.AppointmentDAO"%>
+<%@page import="net.project.model.User"%>
+<%@page import="javax.servlet.http.HttpSession" %>
 
 <!DOCTYPE html>
 <html>
@@ -38,6 +40,8 @@
 		}
 	</style>
 </head>
+<%User sessionUser = (User)session.getAttribute("user");
+int sessionUserId = sessionUser.getId(); %>
 <body>
     <h1>Welcome</h1>
     <h2>View Scheduled Appointments</h2>
@@ -50,8 +54,8 @@
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Professor ID</th>
+                <th>Student ID</th>
                 <th>Notes</th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -70,15 +74,20 @@
                 </tr>
             <% 
             } else {
+            	
+            	
                 for (Appointment appointment : appointmentList) {
+                	if((sessionUser.getUserType() == "student" && appointment.getStudentId() == sessionUserId)
+                    		|| (sessionUser.getUserType() == "professor" && appointment.getProfessorId() == sessionUserId)){
+            
             %>
                 <tr>
                     <td><%= appointment.getid() %></td>
                     <td><%= appointment.getStartTime() %></td>
                     <td><%= appointment.getEndTime() %></td>
                     <td><%= appointment.getProfessorId() %></td>
-                    <td><%= appointment.getNotes() %></td>
-                    <td>
+                    <td><%= appointment.getStudentId() %></td>
+                    <td><%= appointment.getNotes() %></td>          
                         <form action="<%= request.getContextPath() %>/appointmentpage" method="post">
                             <input type="hidden" name="id" value="<%= appointment.getid() %>">
                             <input type="hidden" name="startTime" value="<%= appointment.getStartTime().toString() %>">
@@ -87,15 +96,30 @@
                             <input type="hidden" name="notes" value="<%= appointment.getNotes() %>">
                             <input type="hidden" name="action" value="Delete Appointment" onclick="return confirm('Are you sure you want to delete this appointment?')">
                             <input type="hidden" name="action" value="Update Appointment" onclick="return confirm('Are you sure you want to update this appointment?')">
-                        </form>
-                    </td>
+                        </form>                   
                 </tr>
             <% 
+                	}
                 }
             }
             %>
         </tbody>
     </table>
+
+  <% 
+  if(sessionUser.getUserType() == "professor"){
+  %>
+  <p><a href="professor_dashboard.jsp">Back to Professor Dashboard</a></p>
+  <% 
+  } 
+  else{
+  %>
+  <p><a href="student_dashboard.jsp">Back to Student Dashboard</a></p>
+
+  <% 
+  }
+  %>
+
 
    <form action="<%= request.getContextPath() %>/logout" method="post">
         <input type="submit" value="Logout">

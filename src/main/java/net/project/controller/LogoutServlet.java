@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import jakarta.servlet.RequestDispatcher;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -17,6 +18,9 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate(); // Invalidate the user's session
-        response.sendRedirect(request.getContextPath() + "/index.html"); // Redirect to the login page
+        
+     // Forward the request to the JSP file
+        RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/login.jsp");
+        dispatcher.forward(request, response);
     }
 }
